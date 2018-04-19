@@ -1,0 +1,53 @@
+{
+	"host": "localhost",
+	"port": 5672,
+	"queue": "test",
+	"one_shot": false,
+	"action": "rts-test-1",
+	"actions": {
+		"error": {
+			"type": "exec",
+			"delay": 3.5,
+			"params": {
+				"exec": "boo-boo"
+			}
+		},
+		"test-input": {
+			"type": "exec",
+			"params": {
+				"exec": "grep",
+				"args": [ "-i", "test" ],
+				"input": "Firtst line\nSendond line with test\nLast line\n"
+			}
+		},
+		"shell": {
+			"type": "exec",
+			"delay": 2,
+			"params": {
+				"exec": "/bin/sh"
+			}
+		},
+		"test-action-1": {
+			"type": "exec",
+			"params": {
+				"exec": "ls",
+				"args": [ "-l", "-a" ]
+			}
+		},
+		"test-action-2": {
+			"type": "exec",
+			"params": {
+				"exec": "cat",
+				"args": [ "/etc/passwd" ]
+			}
+		},
+		"rts-test-1": {
+			"type": "rts",
+			"delay": 2,
+			"params": {
+				"json-rpc": { "url": "http://localhost:5555/", "user": "1234", "pass": "123456" },
+				"soap": { "url": "http://localhost/WSDL:555", "user": "123", "pass": "456" }
+			}
+		}
+	}
+}
